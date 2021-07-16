@@ -596,6 +596,9 @@ private extension SKPhotoBrowser {
         // action view animation
         actionView.animate(hidden: hidden)
         
+        // toolbar animation
+        toolbar.setToolbarHidden(hidden: hidden)
+        
         if !hidden && !permanent {
             hideControlsAfterDelay()
         }

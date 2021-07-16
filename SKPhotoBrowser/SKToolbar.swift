@@ -39,6 +39,14 @@ class SKToolbar: UIToolbar {
         }
         return nil
     }
+    
+    func setToolbarHidden(hidden: Bool) {
+        let alpha: CGFloat = hidden ? 0.0 : 1.0
+        
+        UIView.animate(withDuration: 0.35,
+                       animations: { () -> Void in self.alpha = alpha },
+                       completion: nil)
+    }
 }
 
 private extension SKToolbar {
