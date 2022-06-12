@@ -19,13 +19,21 @@ class FromWebViewController: UIViewController, SKPhotoBrowserDelegate {
         SKCache.sharedCache.imageCache = CustomImageCache()
     }
     
-    @IBAction func pushButton(_ sender: AnyObject) {
+    @IBAction func pushJpgPngButton(_ sender: AnyObject) {
         let browser = SKPhotoBrowser(photos: createWebPhotos())
         browser.initializePageIndex(0)
         browser.delegate = self
         browser.preLoadNum = 10
         browser.nextLoadNum = 10
         
+        present(browser, animated: true, completion: nil)
+    }
+
+    @IBAction func pushGifButton(_ sender: AnyObject) {
+        let browser = SKPhotoBrowser(photos: createWebGifPhotos())
+        browser.initializePageIndex(0)
+        browser.delegate = self
+
         present(browser, animated: true, completion: nil)
     }
 }
@@ -55,6 +63,22 @@ private extension FromWebViewController {
             photo.shouldCachePhotoURLImage = true
             return photo
         }
+    }
+
+    func createWebGifPhotos() -> [SKPhotoProtocol] {
+        let gifs: [String] = [
+            "https://media.giphy.com/media/ftdEPX8jF6SvC/giphy.gif",
+            "https://media.giphy.com/media/MDrq4Gwd0i4m4mGwCr/giphy.gif",
+            "https://media.giphy.com/media/jOOjdVK9i2Qn1alT6a/giphy.gif"
+        ]
+
+        var result: [SKPhotoProtocol] = []
+        for (i, v) in gifs.enumerated() {
+            let photo = SKPhoto.photoWithImageURL(v)
+            photo.caption = caption[i]
+            result.append(photo)
+        }
+        return result
     }
 }
 
